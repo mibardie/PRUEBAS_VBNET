@@ -1,0 +1,10 @@
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\bin\Debug\DatagridviewCtrlShift.exe.config
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\bin\Debug\DatagridviewCtrlShift.exe
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\bin\Debug\DatagridviewCtrlShift.pdb
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\bin\Debug\DatagridviewCtrlShift.xml
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\obj\Debug\DatagridviewCtrlShift.Form1.resources
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\obj\Debug\DatagridviewCtrlShift.Resources.resources
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\obj\Debug\DatagridviewCtrlShift.vbproj.GenerateResource.Cache
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\obj\Debug\DatagridviewCtrlShift.exe
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\obj\Debug\DatagridviewCtrlShift.xml
+C:\DESARROLLO\Tests\DatagridviewCtrlShift\DatagridviewCtrlShift\obj\Debug\DatagridviewCtrlShift.pdb
