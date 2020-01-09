@@ -73,23 +73,41 @@
             Else
                 If _EstaPulsandoShift Then
                     '  If Me.DataGridView1.SelectedRows.Count > 1 Then
-                    Dim indice As Integer = Me.DataGridView1.SelectedRows(DataGridView1.SelectedRows.Count - 1).Index
-                    Dim ind1, ind2 As Integer
-                    ind1 = Math.Min(_UltimoIndiceSeleccionado, Me.DataGridView1.CurrentRow.Index)
-                    ind2 = Math.Max(_UltimoIndiceSeleccionado, Me.DataGridView1.CurrentRow.Index)
-                    '    For k = ind1 To ind2
-                    '        Me.DataGridView1.Rows(k).Cells(_CheckColumnIndex).Value = True
-                    '    Next
-                    'Else
-                    '    Dim ind1 As Integer = 0
-                    '    Dim ind2 As Integer = Me.DataGridView1.CurrentRow.Index
-                    '    For k = ind1 To ind2
-                    '        Me.DataGridView1.Rows(k).Cells(_CheckColumnIndex).Value = True
-                    '    Next
+                    'If MouseButtons.HasFlag(MouseButtons.Left) Then ' Está manteniendo click pulsado
+                    '    Me.DataGridView1.CurrentRow.Cells(_CheckColumnIndex).Value = True
+                    '    Exit Sub
 
                     'End If
-                    CheckearTodosONinguno(False)
+                    Dim indice As Integer = Me.DataGridView1.CurrentRow.Index
+                    Dim ind1, ind2, indiceInicial, indiceFinal As Integer
+                    ind1 = Math.Min(_UltimoIndiceSeleccionado, Me.DataGridView1.CurrentRow.Index)
+                    ind2 = Math.Max(_UltimoIndiceSeleccionado, Me.DataGridView1.CurrentRow.Index)
+                    'ind1 = ObtenerMenorIndiceSeleccionado()
+                    'ind2 = ObtenerMayorIndiceSeleccionado()
+                    'If indice > ind2 Then
+                    '    indiceInicial = ind2
+                    '    indiceFinal = indice
+                    'Else
 
+                    '    If indice < ind1 Then
+                    '        indiceInicial = indice
+                    '        indiceFinal = ind1
+                    '    Else
+                    '        ' índice seleccionado entre el menor y el mayor -> Cojo el último índice seleccionado
+                    '        If indice > _UltimoIndiceSeleccionado Then
+                    '            indiceInicial = _UltimoIndiceSeleccionado
+                    '            indiceFinal = indice
+                    '        Else
+                    '            indiceInicial = indice
+                    '            indiceFinal = _UltimoIndiceSeleccionado
+                    '        End If
+                    '    End If
+                    'End If
+
+                    CheckearTodosONinguno(False)
+                    'For k = indiceInicial To indiceFinal
+                    '    Me.DataGridView1.Rows(k).Cells(_CheckColumnIndex).Value = True
+                    'Next
                     For k = ind1 To ind2
 
                         Me.DataGridView1.Rows(k).Cells(_CheckColumnIndex).Value = True
@@ -151,7 +169,7 @@
             AddHandler DataGridView1.CellClick, AddressOf DataGridView1_CellClick
             AddHandler DataGridView1.CellValueChanged, AddressOf DataGridView1_CellValueChanged
         End If
-       
+
 
     End Sub
 
@@ -193,5 +211,49 @@
         '  AddHandler DataGridView1.SelectionChanged, AddressOf DataGridView1_SelectionChanged
         _EnProcesoInterno = False
 
+    End Sub
+    Private Function ObtenerMenorIndiceSeleccionado() As Integer
+        Dim n As Integer = DataGridView1.Rows.Count - 1
+        For Each elementoseleccionado As DataGridViewRow In Me.DataGridView1.SelectedRows
+            If elementoseleccionado.Index < n Then
+                n = elementoseleccionado.Index
+            End If
+        Next
+        Return n
+    End Function
+    Private Function ObtenerMayorIndiceSeleccionado() As Integer
+        Dim n As Integer = 0
+        For Each elementoseleccionado As DataGridViewRow In Me.DataGridView1.SelectedRows
+            If elementoseleccionado.Index > n Then
+                n = elementoseleccionado.Index
+            End If
+        Next
+        Return n
+    End Function
+    Private Function ObtenerIndicesSonContiguos() As Boolean
+        Dim n As Integer = 0
+        Dim ultimoSeleccionado As Integer = 0
+        If Me.DataGridView1.SelectedRows.Count > 0 Then
+            ultimoSeleccionado = ObtenerMenorIndiceSeleccionado()
+            If ultimoSeleccionado = ObtenerMayorIndiceSeleccionado() Then
+                Return True
+            End If
+            If ultimoSeleccionado = ObtenerMayorIndiceSeleccionado() + 1 Then
+                Return True
+            End If
+            For Each elemento As DataGridViewRow In Me.DataGridView1.Rows
+                If elemento.Selected And (elemento.Index - ultimoSeleccionado) > 1 Then
+                    Return False
+                Else
+                    ultimoSeleccionado = elemento.Index
+                End If
+            Next
+        End If
+
+        Return True
+    End Function
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        MsgBox("Contiguos: " + ObtenerIndicesSonContiguos())
     End Sub
 End Class
